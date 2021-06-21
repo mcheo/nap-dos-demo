@@ -85,6 +85,7 @@ You may browse the application at http://localhost
 ```
 docker exec -it nap-dos-demo_legitimate_1 /bin/bash
 cd /home
+chmod 755 good.sh
 ./good.sh
 ```
 Let it runs for at least 5-8 minutes, let NAP DoS to do initial baselining. If everything is working as expected, Elasticsearch AP_DOS: AppProtectDOS dashboard should display charts.
@@ -97,6 +98,7 @@ While the good traffic still running at the background, you may start the attack
 ```
 docker exec -it nap-dos-demo_attacker_1 /bin/bash
 cd /home
+chmod 755 bad.sh
 ./bad.sh
 ```
 
