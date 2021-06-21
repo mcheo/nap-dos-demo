@@ -76,14 +76,14 @@ Edit nginx/nginx.conf file and uncomment the following 2 lines:
 ```
 Execute NGINX reload
 ```
-docker exec -it nap-dos_nginx_1 nginx -s reload
+docker exec -it nap-dos-demo_nginx_1 nginx -s reload
 ```
 
 You may browse the application at http://localhost
 
 5. Generate baseline traffic
 ```
-docker exec -it nap-dos_legitimate_1 /bin/bash
+docker exec -it nap-dos-demo_legitimate_1 /bin/bash
 cd /home
 ./good.sh
 ```
@@ -95,7 +95,7 @@ In the dashboard, apply or remove filter as you wish.
 6. Generate attack traffic</br>
 While the good traffic still running at the background, you may start the attack traffic
 ```
-docker exec -it nap-dos_legitimate_1 /bin/bash
+docker exec -it nap-dos-demo_attacker_1 /bin/bash
 cd /home
 ./bad.sh
 ```
