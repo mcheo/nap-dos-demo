@@ -88,7 +88,7 @@ cd /home
 chmod 755 good.sh
 ./good.sh
 ```
-Let it runs for at least 5-8 minutes, let NAP DoS to do initial baselining. If everything is working as expected, Elasticsearch AP_DOS: AppProtectDOS dashboard should display charts.
+Let it runs for at least 5-8 minutes, let NAP DoS does its initial baselining. If everything is working as expected, Elasticsearch AP_DOS: AppProtectDOS dashboard should display charts.
 
 You may visit the Elasticsearch dashboard at http://localhost:5601 </br>
 Default dashboard has filter, apply or remove filter as you wish.
