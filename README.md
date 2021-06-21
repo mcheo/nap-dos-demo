@@ -90,7 +90,7 @@ cd /home
 Let it runs for at least 5-8 minutes, let NAP DoS to do initial baselining. If everything is working as expected, Elasticsearch AP_DOS: AppProtectDOS dashboard should display charts.
 
 You may visit the Elasticsearch dashboard at http://localhost:5601
-In the dashboard, apply or remove filter as you wish.
+Default dashboard has filter, apply or remove filter as you wish.
 
 6. Generate attack traffic</br>
 While the good traffic still running at the background, you may start the attack traffic
