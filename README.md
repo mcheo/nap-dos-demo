@@ -117,6 +117,7 @@ The general idea is NAP DoS leverage on its ML to perform behaviour dos mitigati
 Note: This dynamic attack signature is crafted for this specific attack, highly accurate and reduce false positive. If attacker re-tool and tweak its attack, NAP DoS will regenerate a new dynamic signature for the new attack. Everything happens without manual intervention.
 - If the attack prolongs and those source IP has been identified as bad actors in "AP_DOS: Detected bad actors" panel, yellow patch (Challenge bad actors RPS) shows in "AP_DOS: HTTP Mitigation" panel
 - Despite the attack traffic keeps coming in (high traffic in "AP_DOS: Client HTTP transaction/s" panel), NAP DoS has mitigate and send only legitimate traffic to backend server (lower traffic in "AP_DOS: Server HTTP transactions/s" panel). As a good user, you may visit the page in http://localhost and it is working fine.
+- There is Start and End bell flag in the charts that signifiy start and end of attack.
 
 
 
