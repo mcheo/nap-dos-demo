@@ -31,7 +31,7 @@ The stack consists of:
 
 
 3. Complete Elasticsearch setup</br>
-Use browser to visit http://localhost:5601, once the page is successfully loaded which means startup has completed, execute the following steps:
+Use browser to visit http://localhost:5601, once the page loads successfully which means startup has completed, execute the following steps:
 
 ```
 step 3.1
