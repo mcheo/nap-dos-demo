@@ -8,6 +8,9 @@ The purpose of this repo is to provide an easy setup to learn and demonstrate NA
 I have clone the NAP DoS dashboard from https://github.com/f5devcentral/nap-dos-elk-dashboards into this repo for ease of setup.
 
 ## Setup
+0. Build NAP DoS Docker image</br>
+Follow the instruction in the beta program to build a local image app-protect-dos image.
+
 1. Clone the repo
 ```
 git clone https://github.com/mcheo-nginx/nap-dos-demo.git
