@@ -1,0 +1,40 @@
+#To demonstrate NGINX NAP DOS
+
+version: '3'
+services:
+    juiceshop:
+        image: bkimminich/juice-shop
+        hostname: juiceshop
+        ports:
+        - "3000:3000"
+    attacker:
+        image: mcheo/alpine-testkit:latest
+        volumes:
+            - ./attacker/:/home/
+        tty: true
+    legitimate:
+        image: mcheo/alpine-testkit:latest
+        volumes:
+            - ./legitimate/:/home/
+        tty: true
+    nginx:
+        image: app-protect-dos
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/log_default.json:/etc/app_protect_dos/log-default.json
+        ports:
+            - "80:80"
+    elasticsearch:
+        image: sebp/elk:793
+        restart: always
+        volumes:
+            - ./elk/logstash/conf.d:/etc/logstash/conf.d
+            - elk:/var/lib/elasticsearch
+        ports:
+            - 9200:9200
+            - 5601:5601
+            - 5261:5261/tcp
+            - 5561:5561/udp
+volumes:
+  elk:
+#remove the subnet

@@ -1,0 +1,7 @@
+{
+    "filter": {
+        "traffic-mitigation-stats": "all",
+        "bad-actors": "all",
+        "attack-signatures": "all"
+    }
+}
