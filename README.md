@@ -1,15 +1,15 @@
 # nap-dos-demo
 
 ## Introduction
-At the time of this writing, NGINX App Protect DoS (NAP DoS) is still in beta version. You may sign up for free trial at https://f5beta.centercode.com/welcome/, you will receive instruction to download binaries and instructions to get started.
+At the time of this writing, NGINX App Protect DoS (NAP DoS) is still in beta version. You may sign up for free trial at https://f5beta.centercode.com/welcome/, you will receive instructions to download the binaries and set it up.
 
-The purpose of this repo is to provide an easy setup to learn and demonstrate NAP DoS.
+The purpose of this repo is to provide an easy setup for learning and demonstrating NAP DoS.
 
-I have clone the NAP DoS dashboard from https://github.com/f5devcentral/nap-dos-elk-dashboards into this repo for ease of setup.
+I have cloned the NAP DoS dashboard from https://github.com/f5devcentral/nap-dos-elk-dashboards into this repo for ease of setup.
 
 ## Setup
 0. Build NAP DoS Docker image</br>
-Follow the instruction in the beta program to build a local image app-protect-dos image.
+Follow the instruction in the beta program to build a local docker container app-protect-dos image.
 
 1. Clone the repo
 ```
@@ -21,20 +21,20 @@ cd nap-dos-demo
 ```
 docker-compose -f docker-compose.yaml up -d
 ```
-The stack consists of:
+The stack consists of 5 containers:
 
-- 1. NGINX App Protect DoS instance
-- 2. Juice Shop as backend app server
-- 3. Legitimate container to generate good traffic
-- 4. Attacker container to generate attack traffic
-- 5. Elasticsearch for NAP DoS dashboard
+- NGINX App Protect DoS instance
+- Juice Shop as backend app server
+- Legitimate container to generate good traffic
+- Attacker container to generate attack traffic
+- Elasticsearch for NAP DoS dashboard
 
 
 3. Complete Elasticsearch setup</br>
 Use browser to visit http://localhost:5601, once the page loads successfully which means startup has completed, execute the following steps:
 
 ```
-step 3.1
+Step 3.1
 curl -X PUT "localhost:9200/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'
 {
   "transient": {
@@ -42,21 +42,21 @@ curl -X PUT "localhost:9200/_cluster/settings?pretty" -H 'Content-Type: applicat
   }
 }'
 
-step 3.2
+Step 3.2
 curl -X PUT "localhost:9200/_all/_settings?pretty" -H 'Content-Type: application/json' -d'
 {
 	"index.blocks.read_only_allow_delete": null
 }
 '
 
-step 3.3
+Step 3.3
 cd elk
 
 curl -XPUT "http://localhost:9200/app-protect-dos-logs"  -H "Content-Type: application/json" -d  @apdos_mapping.json
 
 curl -XPOST "http://localhost:9200/app-protect-dos-logs/_mapping"  -H "Content-Type: application/json" -d  @apdos_geo_mapping.json
 
-step 3.4
+Step 3.4
 KIBANA_CONTAINER_URL=http://localhost:5601
 
 jq -s . kibana/apdos-dashboard.ndjson | jq '{"objects": . }' | \
@@ -79,7 +79,7 @@ Execute NGINX reload
 docker exec -it nap-dos-demo_nginx_1 nginx -s reload
 ```
 
-You may browse the application at http://localhost
+You may browse the Juice Shop application at http://localhost
 
 5. Generate baseline traffic
 ```
@@ -103,8 +103,7 @@ chmod 755 bad.sh
 ```
 
 
-
-## Interpreting the Graph
+## Interpret the Graph
 
 <img src="elk/images/dashboard1.png" width="800px"/>
 
@@ -114,10 +113,7 @@ The general idea is NAP DoS leverage on its ML to perform behaviour dos mitigati
 - NGINX detects server stress, spike in "AP_DOS: Server_stress_level" panel
 - Initially, NGINX will goes into self defense mode by doing global challenge. Red patch (Redirect/Challenge global RPS) shows in "AP_DoS: HTTP Mitigation" panel
 - Once NAP DoS gather sufficient data and generate dynamic attack signatures in response to this particular attack, attack signature shows in "AP_DoS: Attack Signatures" panel, purple patch (Redirect/Challenge signatures RPS) shows in "AP_DOS: HTTP Mitigation" panel. At thsi time NAP DoS is doing targeted mitigation instead of global mitigation.</br>
-Note: This dynamic attack signature is crafted for this specific attack, highly accurate and reduce false positive. If attacker re-tool and tweak its attack, NAP DoS will regenerate a new dynamic signature for the new attack. Everything happens without manual intervention.
+**Note**: This dynamic attack signature is crafted for this specific attack, highly accurate and reduce false positive. If attacker re-tool and tweak its attack, NAP DoS will auto regenerate a new dynamic signature for the new attack.
 - If the attack prolongs and those source IP has been identified as bad actors in "AP_DOS: Detected bad actors" panel, yellow patch (Redirect/Challenge bad actors RPS) shows in "AP_DOS: HTTP Mitigation" panel
 - Despite the attack traffic keeps coming in (high traffic in "AP_DOS: Client HTTP transaction/s" panel), NAP DoS has mitigate and send only legitimate traffic to backend server (lower traffic in "AP_DOS: Server HTTP transactions/s" panel). As a good user, you may visit the page in http://localhost and it is working fine.
 - There is Start and End bell flag in the charts that signifiy start and end of attack.
-
-
-
