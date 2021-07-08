@@ -1,7 +1,7 @@
 # nap-dos-demo
 
 ## Introduction
-At the time of this writing, NGINX App Protect DoS (NAP DoS) is still in beta version. You may sign up for free trial at https://f5beta.centercode.com/welcome/, you will receive instructions to download the binaries and set it up.
+NGINX App Protect DoS has been released early July 2021. You may refer to this doc https://docs.nginx.com/nginx-app-protect-dos/ for more information, including getting trial license for testing.
 
 The purpose of this repo is to provide an easy setup for learning and demonstrating NAP DoS.
 
