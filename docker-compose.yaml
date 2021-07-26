@@ -37,4 +37,3 @@ services:
             - 5561:5561/udp
 volumes:
   elk:
-#remove the subnet
