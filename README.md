@@ -9,7 +9,8 @@ I have cloned the NAP DoS dashboard from https://github.com/f5devcentral/nap-dos
 
 ## Setup
 0. Build NAP DoS Docker image</br>
-Follow the instruction in the beta program to build a local docker container app-protect-dos image.
+Follow the instruction in the official doc to build a local docker container app-protect-dos image.
+https://docs.nginx.com/nginx-app-protect-dos/deployment-guide/learn-about-deployment/#docker-deployment-with-nginx-app-protect 
 
 1. Clone the repo
 ```
